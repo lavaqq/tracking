@@ -19,6 +19,7 @@ use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -72,13 +73,29 @@ class MealResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label('Nom')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('type')
+                TextColumn::make('type')
                     ->label('Type')
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('totalCalories')
+                    ->label('Calories')
+                    ->getStateUsing(fn (Meal $record): string => $record->getTotalCalories() . ' kcal')
+                    ->sortable(),
+                TextColumn::make('totalProteins')
+                    ->label('Proteines')
+                    ->getStateUsing(fn (Meal $record): string => $record->getTotalProteins() . ' g')
+                    ->sortable(),
+                TextColumn::make('totalLipids')
+                    ->label('Lipides')
+                    ->getStateUsing(fn (Meal $record): string => $record->getTotalLipids() . ' g')
+                    ->sortable(),
+                TextColumn::make('totalCarbohydrates')
+                    ->label('Glucides')
+                    ->getStateUsing(fn (Meal $record): string => $record->getTotalCarbohydrates() . ' g')
+                    ->sortable(),
             ])
             ->filters([])
             ->actions([
