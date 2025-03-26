@@ -68,11 +68,7 @@ class IngredientResource extends Resource
                 Tables\Actions\EditAction::make()
                     ->label(''),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+            ->bulkActions([]);
     }
 
     public static function getRelations(): array
