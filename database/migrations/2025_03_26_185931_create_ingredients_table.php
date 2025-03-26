@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('unit'); // enum: Enums\Unit.php
             $table->decimal('calories_per_unit', 8, 2);
+            $table->decimal('lipids_per_unit', 8, 2);
+            $table->decimal('carbohydrates_per_unit', 8, 2);
+            $table->decimal('proteins_per_unit', 8, 2);
             $table->timestamps();
         });
     }
