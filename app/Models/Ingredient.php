@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\Unit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Ingredient extends Model
 {
@@ -26,12 +27,10 @@ class Ingredient extends Model
     }
 
     /**
-     * The meals that this ingredient belongs to.
+     * The meal ingredients that belong to this ingredient.
      */
-    public function meals(): BelongsToMany
+    public function ingredientMeals(): HasMany
     {
-        return $this->belongsToMany(Meal::class, 'meal_ingredients')
-            ->withPivot('quantity')
-            ->withTimestamps();
+        return $this->hasMany(MealIngredient::class);
     }
 }

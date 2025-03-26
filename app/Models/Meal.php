@@ -6,6 +6,7 @@ use App\Enums\MealType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Meal extends Model
 {
@@ -27,15 +28,12 @@ class Meal extends Model
     }
 
     /**
-     * The ingredients associated with this meal.
+     * A meal has many meal ingredients.
      */
-    public function ingredients(): BelongsToMany
+    public function mealIngredients(): HasMany
     {
-        return $this->belongsToMany(Ingredient::class, 'meal_ingredients')
-            ->withPivot('quantity')
-            ->withTimestamps();
+        return $this->hasMany(MealIngredient::class);
     }
-
     /**
      * A meal belongs to a meal plan.
      */
