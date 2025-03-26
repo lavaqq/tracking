@@ -2,7 +2,9 @@
 
 namespace App\Enums;
 
-enum Unit: string
+use Filament\Support\Contracts\HasLabel;
+
+enum Unit: string implements HasLabel
 {
     case GRAM = 'g';
     case KILOGRAM = 'kg';
@@ -28,19 +30,6 @@ enum Unit: string
             default => null,
         };
     }
-    /**
-     * Get an associative array of unit values and their labels.
-     *
-     * @return array<string, string> An associative array where the key is the unit value and the value is the corresponding label.
-     *
-     */
-    public static function select(): array
-    {
-        foreach (self::cases() as $case) {
-            $data[$case->value] = $case->getLabel();
-        }
-        return $data;
-    }
 
     /**
      * Get a random unit case.
@@ -50,15 +39,5 @@ enum Unit: string
     public static function random(): static
     {
         return self::cases()[random_int(0, count(self::cases()) - 1)];
-    }
-
-    /**
-     * Return all the cases of the Unit enum.
-     *
-     * @return array<int, static> An array of all the cases of the Unit enum.
-     */
-    public static function all(): array
-    {
-        return self::cases();
     }
 }
