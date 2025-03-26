@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('type'); // enum: Enums\MealType.php
             $table->text('description')->nullable();
+            $table->text('recipe')->nullable();
             $table->timestamps();
         });
     }
